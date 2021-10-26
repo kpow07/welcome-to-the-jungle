@@ -36,6 +36,7 @@ let habitats = [
     ]}, 
 ];
 
+
 let randomAnimal 
 let visitorLocation
 
@@ -49,9 +50,7 @@ function chooseRandomAnimal() {
 
 // Assign clue to random animal
 function getClue() {
-    let firstClue = randomAnimal.clues[0]
-    console.log('The zookeeper has been given their first clue.')
-    return firstClue
+    console.log('The zookeeper has been given a clue.')
 }
 
 // Habitat names and descriptions
@@ -72,7 +71,7 @@ function exploreHabitat(habitats) {
 
 // Is the random creature in this habitat?
 function searchHabitat() {
-    return (randomAnimal === visitorLocation)
+    return (randomAnimal.type === visitorLocation)
 }
 
 module.exports = {

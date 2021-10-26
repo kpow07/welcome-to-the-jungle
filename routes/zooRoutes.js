@@ -3,8 +3,8 @@ const zoo = require('../model/zoo')
 const express = require('express')
 const router = express.Router()
 
+let clue = 0
 let randomAnimal
-let firstClue 
 
 
 router.get('/chooseRandomAnimal', (req, res) => {
@@ -13,9 +13,13 @@ router.get('/chooseRandomAnimal', (req, res) => {
 })
 
 router.get('/getClue', (req, res) => {
-    firstClue = zoo.getClue()
-    res.send('Your first clue is: ' + firstClue + 'To view the habitats you can explore, continue to /listHabitats.')
-})
+    clueToSend = randomAnimal.clues[clue]
+    clue++
+    if ([clue] > 3) {
+        res.send('Oops, you have run out of clues! Keep exploring, Zookeeper!')
+    } else {
+    res.send('Your first clue is: ' + clueToSend + ' To view the habitats you can explore, continue to /listHabitats. For up to 2 additional clues revisit /getClue.')
+}})
 
 router.get('/listHabitats', (req, res) => {
     res.send(zoo.listHabitats()) 
@@ -32,7 +36,7 @@ router.get('/exploreHabitat', (req, res) => {
 
 router.get('/searchHabitat', (req, res) => {
     let message
-    let found = zoo.searchHabitat()
+    let found = zoo.searchHabitat(randomAnimal)
     if (found) {
         message = 'Wow! You found the ' + randomAnimal + 'You will make a wonderful Zookeeper!'
     } else {
