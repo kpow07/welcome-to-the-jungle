@@ -7,7 +7,7 @@ We've got fun and games
 Launch a game using
 ```node server.js```
 
-and curl http://localhost:3000/ for instructions
+and ```curl http://localhost:3000/``` for instructions
 
 # Free Joke
 Why don't leopards play hide and seek? ...
