@@ -36,9 +36,8 @@ let habitats = [
     ]}, 
 ];
 
-
 let randomAnimal 
-let zookeeperLocation
+let zookeeperLocation 
 
 // Starts game with random animal selection
 function chooseRandomAnimal() {
@@ -48,7 +47,7 @@ function chooseRandomAnimal() {
     return randomAnimal
 }
 
-// Assign clue to random animal
+// Assign clue to random animal, max of 3 clues per game
 function getClue() {
     console.log('The zookeeper has been given a clue.')
 }
@@ -62,13 +61,19 @@ function listHabitats() {
     return habitatList
 }
 
-// Explore each habitat futher to see list of animals inside
-function exploreHabitat(habitats) {
-    zookeeperLocation = habitats.name.description
-    console.log('The zookeeper has entered the: ', habitats)
+// Explore each habitat to see list of animals inside
+function exploreHabitat() {
+    let animalListByHabitat = habitats.map(function(habitat) {
+        return { name: habitat.name,
+             animals: habitat.animals.map(function(animal) {
+                return animal.type }) 
+    }}
+    )
+    // console.log('The zookeeper is exploring the: ', animalListByHabitat)
+    return animalListByHabitat
 }
 
-// Select the animal you think fits the clues given to win the game!
+// Select the animal you think fits the clues given to win the game! Game ends after 3 wrong guesses
 function selectAnimal() {
     return (randomAnimal.type === zookeeperLocation)
 }
