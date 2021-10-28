@@ -1,9 +1,11 @@
 const zoo = require('../model/zoo')
 
 const express = require('express')
+const e = require('express')
 const router = express.Router()
 
 let clue = 0
+let guesses = 0
 let randomAnimal
 
 router.get('/chooseRandomAnimal', (req, res) => {
@@ -40,25 +42,29 @@ router.get('/exploreHabitat', (req, res) => {
         if (habitatInfo == null) {
             res.send('Oops, you have not entered a real habitat! Please check your spelling. There are 5 habitats: forest, grassland, desert, mountain, and aquatic.\nTo explore each habitat further, use req query. Example: /exploreHabitat?habitat=forest ')
         } else {
-            res.send(habitatInfo.animals)
+            res.send('The animals within this habitat are: ' + habitatInfo.animals)
         }
     }
 })
 
-// Need to implement 3 guesses & test win conditions
+// Need to add instructions on how to properly guess before a guess is made
 router.get('/selectAnimal', (req, res) => {
-    let guessAnimal = req.query.animal
-    zoo.selectAnimal()
+    zoo.selectAnimal() 
+    let guessAnimal = req.query.animal 
+    guesses++
     if (guessAnimal == null) {
         res.send('Oops, that is not an animal we have at the zoo! Please check your spelling. To make a guess, use req query. Example: /selectAnimal?animal=deer ')
     } else {
        if (guessAnimal == randomAnimal.type) {
        res.send('Wow! You found the ' + randomAnimal.type + '!\nYou will make a wonderful Zookeeper!\nIf you\'d like to play again revisit /chooseRandomAnimal')
     } else {
+        if (guesses >= 3) {
+            res.send('Oops, you have run out of guesses. Please leave my zoo.')  
+    } else {
         if (guessAnimal != randomAnimal.type) {
-        res.send('Uh oh! This is not the correct animal enclosure. You still have some work to do, aspiring Zookeeper!\nVisit /getClue to get another clue.')
+        res.send('Uh oh, ' + guessAnimal + ' is not the correct animal. You have made: ' + guesses + ' guesses.\nYou still have some work to do, aspiring Zookeeper!')
     }
-}}})
+}}}})
 
 router.get('/', (req, res) => {
   let instructions = 
@@ -67,8 +73,9 @@ router.get('/', (req, res) => {
    To start a game go to /chooseRandomAnimal 
    To receive up to 3 clues go to /getClue 
    For a list of the 5 available habitats go to /listHabitats 
-   For more information on the animals within each habitat go to /exploreHabitat 
+   For more information on the animals within each habitat go to /exploreHabitat
    To select the animal which you think best reflects the clues given go to /selectAnimal 
+   When you are ready to guess use /selectAnimal?animal=animal+name
    You will have 3 chances to guess the correct animal! 
    Good luck, and don't be a cheetah!`
 
