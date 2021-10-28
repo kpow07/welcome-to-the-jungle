@@ -6,7 +6,6 @@ const router = express.Router()
 let clue = 0
 let randomAnimal
 
-
 router.get('/chooseRandomAnimal', (req, res) => {
     randomAnimal = zoo.chooseRandomAnimal()
     res.send('A random animal has been selected! Continue to /getClue to receive your first clue! Good Luck, Zookeeper! ')
@@ -39,13 +38,11 @@ router.get('/exploreHabitat', (req, res) => {
             return habitatData.name == habitatName
         })
         if (habitatInfo == null) {
-            res.send('Not a real habitat!')
+            res.send('Oops, you have not entered a real habitat! Please check your spelling. There are 5 habitats: forest, grasslands, desert, mountain, and aquatic. To explore each habitat further, use req query. Example: /exploreHabitat?habitats=forest ')
         } else {
             res.send(habitatInfo.animals)
         }
     }
-    
-    // res.send('You have entered the ' + habitats + 'habitat!')
 })
 
 
@@ -77,3 +74,4 @@ router.get('/', (req, res) => {
 })
 
 module.exports = router
+   
