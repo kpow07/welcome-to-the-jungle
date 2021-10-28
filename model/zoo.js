@@ -69,7 +69,7 @@ function exploreHabitat() {
                 return animal.type }) 
     }}
     )
-    console.log('The zookeeper is exploring the: ', animalListByHabitat)
+    console.log('The zookeeper is exploring a habitat.')
     return animalListByHabitat
 }
 

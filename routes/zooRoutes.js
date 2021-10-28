@@ -8,7 +8,7 @@ let randomAnimal
 
 router.get('/chooseRandomAnimal', (req, res) => {
     randomAnimal = zoo.chooseRandomAnimal()
-    res.send('A random animal has been selected! Continue to /getClue to receive your first clue! Good Luck, Zookeeper! ')
+    res.send('A random animal has been selected!\nContinue to /getClue to receive your first clue! Good Luck, Zookeeper! ')
 })
 
 router.get('/getClue', (req, res) => {
@@ -18,15 +18,14 @@ router.get('/getClue', (req, res) => {
     if ([clue] > 3) {
         res.send('Oops, you have run out of clues! Keep exploring, Zookeeper!')
     } else {
-    res.send('Your clue is: ' + clueToSend + ' To view the habitats you can explore, continue to /listHabitats. For up to 2 additional clues revisit /getClue.')
+    res.send('Your clue is: ' + clueToSend +  '\n' + 'To view the habitats you can explore, continue to /listHabitats. For up to 2 additional clues revisit /getClue.')
 }})
 
+// HELPPP - I want this to be more readable and also send the message
 router.get('/listHabitats', (req, res) => {
+    let message = ('\nTo further explore the habitats and find more about the creatures within, continue to /exploreHabitats.')
     res.json(zoo.listHabitats()) 
-    // HELPPPP this won't work
-    // res.send('To further explore the habitats and find more about the creatures within, continue to /exploreHabitats.') 
 })
-
 
 router.get('/exploreHabitat', (req, res) => {
     let habitatName = req.query.habitat
@@ -45,7 +44,7 @@ router.get('/exploreHabitat', (req, res) => {
     }
 })
 
-
+// Need to implement 3 guesses & test win conditions
 router.get('/selectAnimal', (req, res) => {
     let message
     let found = zoo.selectAnimal(randomAnimal)
@@ -55,7 +54,6 @@ router.get('/selectAnimal', (req, res) => {
         message = 'Uh oh! This is not the correct animal enclosure. You still have some work to do, aspiring Zookeeper! Visit /getClue to get another clue.'
     }
     res.send(message)
-    // implement 3 guesses before game ends
 })
 
 router.get('/', (req, res) => {
