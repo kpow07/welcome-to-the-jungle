@@ -27,17 +27,18 @@ router.get('/listHabitats', (req, res) => {
     res.json(zoo.listHabitats()) 
 })
 
+
 router.get('/exploreHabitat', (req, res) => {
     let habitatName = req.query.habitat
     if (habitatName == null) {
-        res.send('There are 5 habitats: forest, grasslands, desert, mountain, and aquatic. To explore each habitat further, use req query. Example: /exploreHabitat?habitats=forest')
+        res.send('There are 5 habitats: forest, grassland, desert, mountain, and aquatic.\nTo explore each habitat further, use req query. Example: /exploreHabitat?habitat=forest')
     } else {
         let animalsByHabitat = zoo.exploreHabitat()
         let habitatInfo = animalsByHabitat.find(function(habitatData) {
             return habitatData.name == habitatName
         })
         if (habitatInfo == null) {
-            res.send('Oops, you have not entered a real habitat! Please check your spelling. There are 5 habitats: forest, grasslands, desert, mountain, and aquatic. To explore each habitat further, use req query. Example: /exploreHabitat?habitats=forest ')
+            res.send('Oops, you have not entered a real habitat! Please check your spelling. There are 5 habitats: forest, grassland, desert, mountain, and aquatic.\nTo explore each habitat further, use req query. Example: /exploreHabitat?habitat=forest ')
         } else {
             res.send(habitatInfo.animals)
         }
@@ -46,15 +47,18 @@ router.get('/exploreHabitat', (req, res) => {
 
 // Need to implement 3 guesses & test win conditions
 router.get('/selectAnimal', (req, res) => {
-    let message
-    let found = zoo.selectAnimal(randomAnimal)
-    if (found) {
-        message = 'Wow! You found the ' + randomAnimal + 'You will make a wonderful Zookeeper!'
+    let guessAnimal = req.query.animal
+    zoo.selectAnimal()
+    if (guessAnimal == null) {
+        res.send('Oops, that is not an animal we have at the zoo! Please check your spelling. To make a guess, use req query. Example: /selectAnimal?animal=deer ')
     } else {
-        message = 'Uh oh! This is not the correct animal enclosure. You still have some work to do, aspiring Zookeeper! Visit /getClue to get another clue.'
+       if (guessAnimal == randomAnimal.type) {
+       res.send('Wow! You found the ' + randomAnimal.type + '!\nYou will make a wonderful Zookeeper!\nIf you\'d like to play again revisit /chooseRandomAnimal')
+    } else {
+        if (guessAnimal != randomAnimal.type) {
+        res.send('Uh oh! This is not the correct animal enclosure. You still have some work to do, aspiring Zookeeper!\nVisit /getClue to get another clue.')
     }
-    res.send(message)
-})
+}}})
 
 router.get('/', (req, res) => {
   let instructions = 

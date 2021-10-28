@@ -37,7 +37,6 @@ let habitats = [
 ];
 
 let randomAnimal 
-let zookeeperLocation 
 
 // Starts game with random animal selection
 function chooseRandomAnimal() {
@@ -75,7 +74,8 @@ function exploreHabitat() {
 
 // Select the animal you think fits the clues given to win the game! Game ends after 3 wrong guesses
 function selectAnimal() {
-    return (randomAnimal.type === zookeeperLocation)
+    return randomAnimal.type,
+    console.log('The zookeeper has made a guess!')
 }
 
 module.exports = {
