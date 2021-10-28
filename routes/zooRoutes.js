@@ -53,13 +53,13 @@ router.get('/selectAnimal', (req, res) => {
     let guessAnimal = req.query.animal 
     guesses++
     if (guessAnimal == null) {
-        res.send('Oops, that is not an animal we have at the zoo! Please check your spelling. To make a guess, use req query. Example: /selectAnimal?animal=deer ')
+        res.send('Oops, that is not an animal we have at the zoo! Please check your spelling. To make a guess, use req query. Example: /selectAnimal?animal=mountain+goat ')
     } else {
        if (guessAnimal == randomAnimal.type) {
        res.send('Wow! You found the ' + randomAnimal.type + '!\nYou will make a wonderful Zookeeper!\nIf you\'d like to play again revisit /chooseRandomAnimal')
     } else {
         if (guesses >= 3) {
-            res.send('Oops, you have run out of guesses. Please leave my zoo.')  
+            res.send('Oops, you have run out of guesses. Please leave my zoo.\nIf you\'d like to play again revisit /chooseRandomAnimal')  
     } else {
         if (guessAnimal != randomAnimal.type) {
         res.send('Uh oh, ' + guessAnimal + ' is not the correct animal. You have made: ' + guesses + ' guesses.\nYou still have some work to do, aspiring Zookeeper!')
