@@ -196,18 +196,24 @@ let habitats = [
   },
 ];
 
+let usedAnimals = []
 let randomAnimal;
 
 // Starts game with random animal selection
 function chooseRandomAnimal() {
   let randomHabitat = habitats[Math.floor(Math.random() * habitats.length)];
+  let animalsToChooseFrom = randomHabitat.animals.filter(function(animal) {
+      for (let usedAnimal of usedAnimals) {
+          if (animal === usedAnimal) {
+              return false
+          } 
+      } return true
+  })
   randomAnimal =
-    randomHabitat.animals[
-      Math.floor(Math.random() * randomHabitat.animals.length)
+    animalsToChooseFrom[
+      Math.floor(Math.random() * animalsToChooseFrom.length)
     ];
-    randomHabitat.animals = randomHabitat.animals.filter(function(animal) {
-        return animal != randomAnimal
-    })
+    usedAnimals.push(randomAnimal)
   console.log("The random animal has been selected as: " + randomAnimal.type);
   return randomAnimal;
 }
