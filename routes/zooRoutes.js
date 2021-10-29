@@ -39,7 +39,7 @@ router.get("/listHabitats", (req, res) => {
     message += `${habitat.name.toUpperCase()}: ${habitat.description}\n\n`
   }
   message +=
-    "To further explore the habitats and find more about the creatures within, continue to /exploreHabitats.";
+    "To further explore the habitats and find more about the creatures within, continue to /exploreHabitat.";
   res.send(message);
 });
 
