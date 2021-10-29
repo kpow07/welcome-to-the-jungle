@@ -36,7 +36,7 @@ router.get("/listHabitats", (req, res) => {
   let message = "";
   for (let habitat of habitatList) {
     JSON.stringify(habitat)
-    message += `${habitat.name}: ${habitat.description}\n\n`
+    message += `${habitat.name.toUpperCase()}: ${habitat.description}\n\n`
   }
   message +=
     "To further explore the habitats and find more about the creatures within, continue to /exploreHabitats.";
@@ -66,8 +66,8 @@ router.get("/exploreHabitat", (req, res) => {
 
 // Need to add instructions on how to properly guess before a guess is made
 router.get("/selectAnimal", (req, res) => {
-  zoo.selectAnimal();
   let guessAnimal = req.query.animal;
+  zoo.selectAnimal(guessAnimal);
   guesses++;
   if (guessAnimal == null) {
     res.send(
