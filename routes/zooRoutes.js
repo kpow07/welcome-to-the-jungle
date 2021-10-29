@@ -35,10 +35,11 @@ router.get("/listHabitats", (req, res) => {
   let habitatList = zoo.listHabitats();
   let message = "";
   for (let habitat of habitatList) {
-    message += JSON.stringify(habitat) + "\n";
+    JSON.stringify(habitat)
+    message += `${habitat.name}: ${habitat.description}\n\n`
   }
   message +=
-    "\nTo further explore the habitats and find more about the creatures within, continue to /exploreHabitats.";
+    "To further explore the habitats and find more about the creatures within, continue to /exploreHabitats.";
   res.send(message);
 });
 
