@@ -243,7 +243,7 @@ function exploreHabitat() {
 // Select the animal you think fits the clues given to win the game! Game ends after 3 wrong guesses
 function selectAnimal(guessAnimal) {
     if (guessAnimal === randomAnimal.type) {
-        console.log('WOW YOU WON')
+        console.log('Winner! The zookeeper has correctly guessed the random animal!')
     } else {
         console.log("The zookeeper has made a guess!");
     }
