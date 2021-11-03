@@ -67,15 +67,18 @@ router.get("/exploreHabitat", (req, res) => {
         "Oops, you have not entered a real habitat! Please check your spelling. There are 5 habitats: forest, grassland, desert, mountain, and aquatic.\nTo explore each habitat further, use req query. Example: /exploreHabitat?habitat=forest "
       );
     } else {
-      res.send("The animals within this habitat are: " + habitatInfo.animals + '\nWhen you are ready to make a guess, go to /selectAnimal using req query. Example: /selectAnimal?animal=mountain+goat ');
+      res.send(
+        "The animals within this habitat are: " +
+          habitatInfo.animals +
+          "\nWhen you are ready to make a guess, go to /selectAnimal using req query. Example: /selectAnimal?animal=mountain+goat "
+      );
     }
   }
 });
 
-
 router.get("/selectAnimal", (req, res) => {
   let guessAnimal = req.query.animal;
-  zoo.selectAnimal(guessAnimal);
+  zoo.selectAnimal();
   guesses++;
   if (guessAnimal == null) {
     guesses--;
@@ -120,7 +123,7 @@ router.get("/", (req, res) => {
    When you are ready to guess use /selectAnimal?animal=animal+name
    You will have 3 chances to guess the correct animal! 
    Good luck, and don't be a cheetah!`;
-
+  
   res.send(instructions);
 });
 

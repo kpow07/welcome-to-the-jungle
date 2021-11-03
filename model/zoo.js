@@ -204,14 +204,14 @@ let randomAnimal;
 function chooseRandomAnimal() {
   animalCount++;
   if (animalCount >= 20) {
-    console.log('The zookeeper has only one animal left to find!')
-  } 
-  let allPossibleAnimals = [] 
+    console.log("The zookeeper has only one animal left to find!");
+  }
+  let allPossibleAnimals = [];
   habitats.forEach((habitat) => {
     habitat.animals.forEach((animal) => {
-      allPossibleAnimals.push(animal)
-    })
-  } )
+      allPossibleAnimals.push(animal);
+    });
+  });
 
   let animalsToChooseFrom = allPossibleAnimals.filter(function (animal) {
     for (let usedAnimal of usedAnimals) {
@@ -221,12 +221,12 @@ function chooseRandomAnimal() {
     }
     return true;
   });
- 
+
   randomAnimal =
     animalsToChooseFrom[Math.floor(Math.random() * animalsToChooseFrom.length)];
   usedAnimals.push(randomAnimal);
   console.log("The random animal has been selected as: " + randomAnimal.type);
-  return randomAnimal
+  return randomAnimal;
 }
 
 // Assign clue to random animal, max of 3 clues per game
@@ -255,7 +255,7 @@ function exploreHabitat() {
   });
   console.log("The zookeeper is exploring a habitat.");
   return animalListByHabitat;
-} 
+}
 
 // Select the animal you think fits the clues given to win the game! Game ends after 3 wrong guesses
 function selectAnimal(guessAnimal) {
@@ -265,7 +265,7 @@ function selectAnimal(guessAnimal) {
     );
   } else {
     console.log("The zookeeper has made a guess!");
-  }
+  } 
 }
 
 module.exports = {
