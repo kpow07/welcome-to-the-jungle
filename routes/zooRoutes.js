@@ -66,7 +66,7 @@ router.get("/exploreHabitat", (req, res) => {
         "Oops, you have not entered a real habitat! Please check your spelling. There are 5 habitats: forest, grassland, desert, mountain, and aquatic.\nTo explore each habitat further, use req query. Example: /exploreHabitat?habitat=forest "
       );
     } else {
-      res.send("The animals within this habitat are: " + habitatInfo.animals);
+      res.send("The animals within this habitat are: " + habitatInfo.animals + '\nWhen you are ready to make a guess, go to /selectAnimal using req query. Example: /selectAnimal?animal=mountain+goat ');
     }
   }
 });
