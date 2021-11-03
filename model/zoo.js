@@ -196,26 +196,37 @@ let habitats = [
   },
 ];
 
-let usedAnimals = []
+let animalCount = 0;
+let usedAnimals = [];
 let randomAnimal;
 
 // Starts game with random animal selection
 function chooseRandomAnimal() {
-  let randomHabitat = habitats[Math.floor(Math.random() * habitats.length)];
-  let animalsToChooseFrom = randomHabitat.animals.filter(function(animal) {
-      for (let usedAnimal of usedAnimals) {
-          if (animal === usedAnimal) {
-              return false
-          } 
-      } return true
-  })
+  animalCount++;
+  if (animalCount >= 20) {
+    console.log('The zookeeper has only one animal left to find!')
+  } 
+  let allPossibleAnimals = [] 
+  habitats.forEach((habitat) => {
+    habitat.animals.forEach((animal) => {
+      allPossibleAnimals.push(animal)
+    })
+  } )
+
+  let animalsToChooseFrom = allPossibleAnimals.filter(function (animal) {
+    for (let usedAnimal of usedAnimals) {
+      if (animal === usedAnimal) {
+        return false;
+      }
+    }
+    return true;
+  });
+ 
   randomAnimal =
-    animalsToChooseFrom[
-      Math.floor(Math.random() * animalsToChooseFrom.length)
-    ];
-    usedAnimals.push(randomAnimal)
+    animalsToChooseFrom[Math.floor(Math.random() * animalsToChooseFrom.length)];
+  usedAnimals.push(randomAnimal);
   console.log("The random animal has been selected as: " + randomAnimal.type);
-  return randomAnimal;
+  return randomAnimal
 }
 
 // Assign clue to random animal, max of 3 clues per game
@@ -248,11 +259,13 @@ function exploreHabitat() {
 
 // Select the animal you think fits the clues given to win the game! Game ends after 3 wrong guesses
 function selectAnimal(guessAnimal) {
-    if (guessAnimal === randomAnimal.type) {
-        console.log('Winner! The zookeeper has correctly guessed the random animal!')
-    } else {
-        console.log("The zookeeper has made a guess!");
-    }
+  if (guessAnimal === randomAnimal.type) {
+    console.log(
+      "Winner! The zookeeper has correctly guessed the random animal!"
+    );
+  } else {
+    console.log("The zookeeper has made a guess!");
+  }
 }
 
 module.exports = {

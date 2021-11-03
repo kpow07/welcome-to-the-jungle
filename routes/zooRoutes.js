@@ -1,18 +1,25 @@
 const zoo = require("../model/zoo");
 
 const express = require("express");
-const e = require("express");
 const router = express.Router();
 
+let noMoreAnimals = 0;
 let clue = 0;
 let guesses = 0;
 let randomAnimal;
 
 router.get("/chooseRandomAnimal", (req, res) => {
-  randomAnimal = zoo.chooseRandomAnimal();
-  res.send(
-    "A random animal has been selected!\nContinue to /getClue to receive your first clue! Good Luck, Zookeeper! "
-  );
+  noMoreAnimals++;
+  if (noMoreAnimals > 20) {
+    res.send(
+      "The zoo is empty, you have located all of the animals! Great work, Zookeeper!\nRestart server if you'd like to play again."
+    );
+  } else {
+    randomAnimal = zoo.chooseRandomAnimal();
+    res.send(
+      "A random animal has been selected!\nContinue to /getClue to receive your first clue! Good Luck, Zookeeper! "
+    );
+  }
 });
 
 router.get("/getClue", (req, res) => {
@@ -35,8 +42,8 @@ router.get("/listHabitats", (req, res) => {
   let habitatList = zoo.listHabitats();
   let message = "";
   for (let habitat of habitatList) {
-    JSON.stringify(habitat)
-    message += `${habitat.name.toUpperCase()}: ${habitat.description}\n\n`
+    JSON.stringify(habitat);
+    message += `${habitat.name.toUpperCase()}: ${habitat.description}\n\n`;
   }
   message +=
     "To further explore the habitats and find more about the creatures within, continue to /exploreHabitat.";
