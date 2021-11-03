@@ -255,7 +255,7 @@ function exploreHabitat() {
   });
   console.log("The zookeeper is exploring a habitat.");
   return animalListByHabitat;
-}
+} 
 
 // Select the animal you think fits the clues given to win the game! Game ends after 3 wrong guesses
 function selectAnimal(guessAnimal) {

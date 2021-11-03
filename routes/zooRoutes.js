@@ -9,6 +9,7 @@ let guesses = 0;
 let randomAnimal;
 
 router.get("/chooseRandomAnimal", (req, res) => {
+  guesses = 0;
   noMoreAnimals++;
   if (noMoreAnimals > 20) {
     res.send(
@@ -71,14 +72,15 @@ router.get("/exploreHabitat", (req, res) => {
   }
 });
 
-// Need to add instructions on how to properly guess before a guess is made
+
 router.get("/selectAnimal", (req, res) => {
   let guessAnimal = req.query.animal;
   zoo.selectAnimal(guessAnimal);
   guesses++;
   if (guessAnimal == null) {
+    guesses--;
     res.send(
-      "Oops, that is not an animal we have at the zoo! Please check your spelling. To make a guess, use req query. Example: /selectAnimal?animal=mountain+goat "
+      "Oops, that is not an animal we have at the zoo! Please check your spelling.\nTo make a guess, use req query. Example: /selectAnimal?animal=mountain+goat "
     );
   } else {
     if (guessAnimal == randomAnimal.type) {
