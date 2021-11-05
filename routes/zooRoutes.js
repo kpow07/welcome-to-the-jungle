@@ -10,6 +10,7 @@ let randomAnimal;
 
 router.get("/chooseRandomAnimal", (req, res) => {
   guesses = 0;
+  clue = 0;
   noMoreAnimals++;
   if (noMoreAnimals > 20) {
     res.send(
@@ -123,7 +124,7 @@ router.get("/", (req, res) => {
    When you are ready to guess use /selectAnimal?animal=animal+name
    You will have 3 chances to guess the correct animal! 
    Good luck, and don't be a cheetah!`;
-  
+
   res.send(instructions);
 });
 

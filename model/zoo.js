@@ -210,7 +210,7 @@ function chooseRandomAnimal() {
   habitats.forEach((habitat) => {
     habitat.animals.forEach((animal) => {
       allPossibleAnimals.push(animal);
-    });
+    }); 
   });
 
   let animalsToChooseFrom = allPossibleAnimals.filter(function (animal) {
@@ -221,7 +221,6 @@ function chooseRandomAnimal() {
     }
     return true;
   });
-
   randomAnimal =
     animalsToChooseFrom[Math.floor(Math.random() * animalsToChooseFrom.length)];
   usedAnimals.push(randomAnimal);
@@ -265,7 +264,7 @@ function selectAnimal(guessAnimal) {
     );
   } else {
     console.log("The zookeeper has made a guess!");
-  } 
+  }  
 }
 
 module.exports = {
